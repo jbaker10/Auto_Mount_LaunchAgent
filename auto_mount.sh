@@ -7,14 +7,14 @@
 #
 
 
-## The directory variables are where you specify the different shares you want to mount, this can be as many as you want
+## The directory variables are where the network shares will be mounted, this can be as many as you want, but should be equal to the number of network mounts
 
 dir1=/Volumes/jeremiah.baker
 dir2=/Volumes/Shared
 dir3=/Volumes/Private
 dir4=/Volumes/DOCS
 
-## The mount variables are where you specify the different shares you want to mount, this can be as many as you want
+## The mount variables are where you specify the different shares you want to mount, this can be as many as you want, but should be equal to the number of mount directories
 
 mount1="/sbin/mount_smbfs //jeremiah.baker@va1srvgenfs01.dco-intranet.lan/Users/jeremiah.baker /Volumes/jeremiah.baker"
 mount2="/sbin/mount_smbfs //jeremiah.baker@va1srvgenfs01.dco-intranet.lan/Shared /Volumes/Shared"
