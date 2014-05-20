@@ -7,11 +7,11 @@
 #
 
 ## First gets the logged in user to use for authentication
-$user=`logname`
+user=`logname`
 
 ## The directory variables are where the network shares will be mounted, this can be as many as you want, but should be equal to the number of network mounts
 
-dir1=/Volumes/jeremiah.baker
+dir1=/Volumes/$user
 dir2=/Volumes/Shared
 dir3=/Volumes/Private
 dir4=/Volumes/DOCS
