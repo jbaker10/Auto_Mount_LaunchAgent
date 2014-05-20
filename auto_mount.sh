@@ -27,7 +27,7 @@ mount4="/sbin/mount_smbfs //jeremiah.baker@va1srvgenfs01.dco-intranet.lan/Shared
 i=1
 while [ $i -lt 12 ];
 do
-    i=`expr $i + 1`
+    ((i++))
     if ping -q -c 1 dco-intranet.lan; then
         if mount | grep $dir1 > /dev/null; then
             echo "$dir1 is already mounted"
