@@ -6,6 +6,8 @@
 #  Created by Jeremiah Baker on 5/14/14.
 #
 
+## First gets the logged in user to use for authentication
+$user=`logname`
 
 ## The directory variables are where the network shares will be mounted, this can be as many as you want, but should be equal to the number of network mounts
 
@@ -16,10 +18,10 @@ dir4=/Volumes/DOCS
 
 ## The mount variables are where you specify the different shares you want to mount, this can be as many as you want, but should be equal to the number of mount directories
 
-mount1="/sbin/mount_smbfs //jeremiah.baker@va1srvgenfs01.dco-intranet.lan/Users/jeremiah.baker /Volumes/jeremiah.baker"
-mount2="/sbin/mount_smbfs //jeremiah.baker@va1srvgenfs01.dco-intranet.lan/Shared /Volumes/Shared"
-mount3="/sbin/mount_smbfs //jeremiah.baker@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private /Volumes/Private"
-mount4="/sbin/mount_smbfs //jeremiah.baker@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private/DOCS /Volumes/DOCS"
+mount1="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Users/jeremiah.baker /Volumes/jeremiah.baker"
+mount2="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared /Volumes/Shared"
+mount3="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private /Volumes/Private"
+mount4="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private/DOCS /Volumes/DOCS"
 
 
 ## Sets a while loop so if it isn't on the network, it tries for 1 minute by pinging an internal resource
@@ -36,7 +38,7 @@ do
             if [ ! -d  $dir1 ]; then
                 mkdir $dir1;
             else
-                Echo "$dir1 exists";
+                echo "$dir1 exists";
             fi
             mounts[$[${#mounts[@]}+1]]=$mount1
         fi
@@ -47,7 +49,7 @@ do
             if [ ! -d  $dir2 ]; then
                 mkdir $dir2;
             else
-                Echo "$dir2 exists";
+                echo "$dir2 exists";
             fi
             mounts[$[${#mounts[@]}+1]]=$mount2
         fi
@@ -58,7 +60,7 @@ do
             if [ ! -d  $dir3 ]; then
                 mkdir $dir3;
             else
-                Echo "$dir3 exists";
+                echo "$dir3 exists";
             fi
             mounts[$[${#mounts[@]}+1]]=$mount3
         fi
@@ -69,7 +71,7 @@ do
             if [ ! -d  $dir4 ]; then
                 mkdir $dir4;
             else
-                Echo "$dir4 exists";
+                echo "$dir4 exists";
             fi
             mounts[$[${#mounts[@]}+1]]=$mount4
         fi
