@@ -33,28 +33,44 @@ do
             echo "$dir1 is already mounted"
         else
             echo "Share not mounted"
-            mkdir $dir1
+            if [ ! -d  $dir1 ]; then
+                mkdir $dir1;
+            else
+                Echo "$dir1 exists";
+            fi
             mounts[$[${#mounts[@]}+1]]=$mount1
         fi
         if mount | grep $dir2 > /dev/null; then
             echo "$dir2 is already mounted"
         else
             echo "Share not mounted"
-            mkdir $dir2
+            if [ ! -d  $dir2 ]; then
+                mkdir $dir2;
+            else
+                Echo "$dir2 exists";
+            fi
             mounts[$[${#mounts[@]}+1]]=$mount2
         fi
         if mount | grep $dir3 > /dev/null; then
             echo "$dir3 is already mounted"
         else
             echo "Share not mounted"
-            mkdir $dir3
+            if [ ! -d  $dir3 ]; then
+                mkdir $dir3;
+            else
+                Echo "$dir3 exists";
+            fi
             mounts[$[${#mounts[@]}+1]]=$mount3
         fi
         if mount | grep $dir4 > /dev/null; then
             echo "$dir4 is already mounted"
         else
             echo "Share not mounted"
-            mkdir $dir4
+            if [ ! -d  $dir4 ]; then
+                mkdir $dir4;
+            else
+                Echo "$dir4 exists";
+            fi
             mounts[$[${#mounts[@]}+1]]=$mount4
         fi
         break;
