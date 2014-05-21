@@ -10,7 +10,7 @@
 ## This script is intended for Macs bound to an Active Directory with Network accounts
 ## It is meant to be used as a LaunchAgent and should be able to work for any and all users
 ##
-##
+## In order to not have to specify passwords in plain text, the machine must be bound to the same domain you are trying to mount network shares on
 ##
 ##
 ##########################################################
