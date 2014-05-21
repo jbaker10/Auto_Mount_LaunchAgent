@@ -6,7 +6,7 @@
 	<string>com.dean.auto_mount</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/Library/LaunchAgents/auto_mount/auto_mount.sh</string>
+		<string>/Library/Application Support/Dean/auto_mount.sh</string>
 	</array>
 	<key>StartInterval</key>
 	<integer>300</integer>
