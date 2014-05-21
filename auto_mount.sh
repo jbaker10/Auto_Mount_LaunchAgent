@@ -40,7 +40,7 @@ i=1
 while [ $i -lt 12 ];
 do
     ((i++))
-    if ping -q -c 1 dco-intranet.lan; then
+    if ping -q -c 1 INTERNAL_RESOURCE; then
         if mount | grep $dir1 > /dev/null; then
             echo "$dir1 is already mounted"
         else
