@@ -6,10 +6,20 @@
 #  Created by Jeremiah Baker on 5/14/14.
 #
 
+##########################################################
+## This script is intended for Macs bound to an Active Directory with Network accounts
+## It is meant to be used as a LaunchAgent and should be able to work for any and all users
+##
+##
+##
+##
+##########################################################
+
 ## First gets the logged in user to use for authentication
 user=`logname`
 
 ## The directory variables are where the network shares will be mounted, this can be as many as you want, but should be equal to the number of network mounts
+## $dir1 will only work properly if your login name is the same as your network shares. This is typically the case with computers that are on a domain
 
 dir1=/Volumes/$user
 dir2=/Volumes/Shared
@@ -18,7 +28,7 @@ dir4=/Volumes/DOCS
 
 ## The mount variables are where you specify the different shares you want to mount, this can be as many as you want, but should be equal to the number of mount directories
 
-mount1="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Users/jeremiah.baker /Volumes/jeremiah.baker"
+mount1="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Users/$user /Volumes/$user"
 mount2="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared /Volumes/Shared"
 mount3="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private /Volumes/Private"
 mount4="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private/DOCS /Volumes/DOCS"
