@@ -44,7 +44,7 @@ do
         if mount | grep $dir1 > /dev/null; then
             echo "$dir1 is already mounted"
         else
-            echo "Share not mounted"
+            echo "$dir1 not mounted"
             if [ ! -d  $dir1 ]; then
                 mkdir $dir1;
             else
@@ -55,7 +55,7 @@ do
         if mount | grep $dir2 > /dev/null; then
             echo "$dir2 is already mounted"
         else
-            echo "Share not mounted"
+            echo "$dir2 not mounted"
             if [ ! -d  $dir2 ]; then
                 mkdir $dir2;
             else
@@ -66,7 +66,7 @@ do
         if mount | grep $dir3 > /dev/null; then
             echo "$dir3 is already mounted"
         else
-            echo "Share not mounted"
+            echo "$dir3 not mounted"
             if [ ! -d  $dir3 ]; then
                 mkdir $dir3;
             else
@@ -77,7 +77,7 @@ do
         if mount | grep $dir4 > /dev/null; then
             echo "$dir4 is already mounted"
         else
-            echo "Share not mounted"
+            echo "$dir4 not mounted"
             if [ ! -d  $dir4 ]; then
                 mkdir $dir4;
             else
