@@ -33,6 +33,34 @@ mount2="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared /Volumes
 mount3="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private /Volumes/Private"
 mount4="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private/DOCS /Volumes/DOCS"
 
+##########################################################
+## New Section
+
+
+main(){
+    if ping -q -c 1 INTERNAL_RESOURCE; then
+        if mount | grep $1 > /dev/null; then
+            echo "$1 is already mounted"
+        else
+            echo "$1 not mounted"
+            if [ ! -d  $1 ]; then
+                mkdir $1;
+            else
+                echo "$1 exists";
+            fi
+            mounts[$[${#mounts[@]}+1]]=$2
+        fi
+    fi
+}
+
+
+## Probably going to add a counter here that will just append the $dir and $mount with the next number
+
+main $dir1 $mount1
+
+
+##########################################################
+
 
 ## Sets a while loop so if it isn't on the network, it tries for 1 minute by pinging an internal resource
 
