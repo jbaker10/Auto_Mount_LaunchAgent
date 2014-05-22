@@ -45,33 +45,32 @@ echo ${mount[@]}
 
 ## Function that will try to ping an internal resource, if successful, will use the arguments passed in to create the necessary mount point and mount the share
 main(){
-    if ping -q -c 1 INTERNAL_RESOURCE; then
-        if mount | grep $1 > /dev/null; then
-            echo "$1 is already mounted"
+    if mount | grep $1 > /dev/null; then
+        echo "$1 is already mounted"
+    else
+        echo "$1 not mounted"
+        if [ ! -d  $1 ]; then
+            mkdir $1;
         else
-            echo "$1 not mounted"
-            if [ ! -d  $1 ]; then
-                mkdir $1;
-            else
-                echo "$1 exists";
-            fi
-            $2
+            echo "$1 exists";
         fi
+        $2
     fi
+
 }
 
 
 
 ## Counter that will cycle through both arrays $dir and $mount and use each one as an argument for the main() function
-
-count=0
-for i in ${dir[@]};
-do
-    main "${dir[$count]}" "${mount[$count]}";
-    echo $count;
-    ((count++));
-done
-
+if ping -q -c 1 INTERNAL_RESOURCE; then
+    count=0
+    for i in ${dir[@]};
+    do
+        main "${dir[$count]}" "${mount[$count]}";
+        echo $count;
+        ((count++));
+    done
+fi
 ##########################################################
 
 ##########################################################
