@@ -33,17 +33,17 @@ echo ${dir[@]}
 
 ## The mount variables are where you specify the different shares you want to mount, this can be as many as you want, but should be equal to the number of mount directories
 
-mount[0]="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Users/$user /Volumes/$user"
-mount[1]="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared /Volumes/Shared"
-mount[2]="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private /Volumes/Private"
-mount[3]="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private/DOCS /Volumes/DOCS"
+mount[0]="/sbin/mount_smbfs //$user@SERVER/PATH/TO/DIRECTORY ${dir[0]}"
+mount[1]="/sbin/mount_smbfs //$user@SERVER/PATH/TO/DIRECTORY ${dir[1]}"
+mount[2]="/sbin/mount_smbfs //$user@SERVER/PATH/TO/DIRECTORY ${dir[2]}"
+mount[3]="/sbin/mount_smbfs //$user@SERVER/PATH/TO/DIRECTORY ${dir[3]}"
 
 echo ${mount[@]}
 
 ##########################################################
 ## New Section
 
-## Function that will try to ping an internal resource, if successful, will use the arguments passed in to create the necessary mount point and mount the share
+## Function that will use the arguments passed in to create the necessary mount point and mount the share
 main(){
     if mount | grep $1 > /dev/null; then
         echo "$1 is already mounted"
@@ -56,12 +56,11 @@ main(){
         fi
         $2
     fi
-
 }
 
 
 
-## Counter that will cycle through both arrays $dir and $mount and use each one as an argument for the main() function
+## Condition that will try to ping an internal resource, if successful, ounter that will cycle through both arrays $dir and $mount and use each one as an argument for the main() function
 if ping -q -c 1 INTERNAL_RESOURCE; then
     count=0
     for i in ${dir[@]};
