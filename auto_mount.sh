@@ -4,7 +4,7 @@
 #  
 #
 #  Created by Jeremiah Baker on 5/14/14.
-#
+#  Modified 5/22/14
 
 ##########################################################
 ## This script is intended for Macs bound to an Active Directory with Network accounts
