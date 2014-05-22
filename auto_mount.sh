@@ -61,7 +61,7 @@ main(){
 
 ## Counter that will cycle through both arrays $dir and $mount and use each one as an argument for the main() function
 
-count=1
+count=0
 for i in ${dir[@]};
 do
     main "${dir[$count]}" "${mount[$count]}";
