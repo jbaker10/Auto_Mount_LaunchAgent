@@ -9,6 +9,10 @@
 		<string>/Library/Application Support/Dean/auto_mount.sh</string>
 	</array>
 	<key>StartInterval</key>
-	<integer>300</integer>
+	<integer>30</integer>
+	<key>StandardErrorPath</key>
+	<string>/var/log/com.dean.auto_mount.log</string>
+	<key>StandardOutPath</key>
+	<string>/var/log/com.dean.auto_mount.log</string>
 </dict>
 </plist>
