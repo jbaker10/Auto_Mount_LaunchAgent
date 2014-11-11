@@ -5,9 +5,6 @@
 #
 #  Created by Jeremiah Baker on 5/14/14.
 #  Modified 5/22/14
-#
-#
-#  Copyright (c) 2014 Jeremiah Baker. All rights reserved.
 
 ##########################################################
 ## This script is intended for Macs bound to an Active Directory with Network accounts
@@ -33,43 +30,45 @@ echo ${dir[@]}
 
 ## The mount variables are where you specify the different shares you want to mount, this can be as many as you want, but should be equal to the number of mount directories
 
-mount[0]="/sbin/mount_smbfs //$user@SERVER/PATH/TO/DIRECTORY ${dir[0]}"
-mount[1]="/sbin/mount_smbfs //$user@SERVER/PATH/TO/DIRECTORY ${dir[1]}"
-mount[2]="/sbin/mount_smbfs //$user@SERVER/PATH/TO/DIRECTORY ${dir[2]}"
-mount[3]="/sbin/mount_smbfs //$user@SERVER/PATH/TO/DIRECTORY ${dir[3]}"
+mount[0]="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Users/$user /Volumes/$user"
+mount[1]="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared /Volumes/Shared"
+mount[2]="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private /Volumes/Private"
+mount[3]="/sbin/mount_smbfs //$user@va1srvgenfs01.dco-intranet.lan/Shared/IT/Private/DOCS /Volumes/DOCS"
 
 echo ${mount[@]}
 
 ##########################################################
 ## New Section
 
-## Function that will use the arguments passed in to create the necessary mount point and mount the share
+## Function that will try to ping an internal resource, if successful, will use the arguments passed in to create the necessary mount point and mount the share
 main(){
-    if mount | grep $1 > /dev/null; then
-        echo "$1 is already mounted"
-    else
-        echo "$1 not mounted"
-        if [ ! -d  $1 ]; then
-            mkdir $1;
+    if ping -q -c 1 dco-intranet.lan; then
+        if mount | grep $1 > /dev/null; then
+            echo "$1 is already mounted"
         else
-            echo "$1 exists";
+            echo "$1 not mounted"
+            if [ ! -d  $1 ]; then
+                mkdir $1;
+            else
+                echo "$1 exists";
+            fi
+            $2
         fi
-        $2
     fi
 }
 
 
 
-## Condition that will try to ping an internal resource, if successful, ounter that will cycle through both arrays $dir and $mount and use each one as an argument for the main() function
-if ping -q -c 1 INTERNAL_RESOURCE; then
-    count=0
-    for i in ${dir[@]};
-    do
-        main "${dir[$count]}" "${mount[$count]}";
-        echo $count;
-        ((count++));
-    done
-fi
+## Counter that will cycle through both arrays $dir and $mount and use each one as an argument for the main() function
+
+count=0
+for i in ${dir[@]};
+do
+    main "${dir[$count]}" "${mount[$count]}";
+    echo $count;
+    ((count++));
+done
+
 ##########################################################
 
 ##########################################################
